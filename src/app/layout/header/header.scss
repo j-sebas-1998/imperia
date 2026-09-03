@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px; /* Ampliamos la altura del header para que respire */
+  padding: 0 32px;
+  background-color: #0f172a;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+
+    .menu-button {
+      background: none;
+      border: none;
+      color: #f8fafc;
+      font-size: 26px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+
+      .logo-image {
+        height: 70px; /* Incrementamos el tamaño del logo considerablemente */
+        width: auto;  /* Mantiene la proporción para que no se deforme */
+        object-fit: contain;
+        display: block;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+}
