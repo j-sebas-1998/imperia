@@ -1,14 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-selector: 'app-root',
-imports: [],
-templateUrl: './app.html',
-styleUrl: './app.scss'
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.html',
+  styleUrl: './app.scss',
 })
-export class App {
-	protected readonly menuOpen = signal(false);
-
-	protected toggleMenu(): void { this.menuOpen.update((open) => !open); }
-	protected closeMenu(): void { this.menuOpen.set(false); }
-}
+export class App {}

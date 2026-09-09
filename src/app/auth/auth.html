@@ -1,0 +1,98 @@
+<div class="auth-shell">
+  <header class="auth-header">
+    <a class="brand" href="/" aria-label="Volver al inicio">
+      <img src="assets/images/logo.png" alt="Logo de Imperia" class="brand-mark" />
+      <span class="brand-copy"><strong>IMPERIA</strong><small>HIGH PERFORMANCE</small></span>
+    </a>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-visual" aria-label="Promoción de Imperia">
+      <div class="auth-visual-copy">
+        <p class="eyebrow"><span></span> Centro de alto rendimiento</p>
+        <h1>Entrena con disciplina,<br>crece con propósito.</h1>
+        <p>
+          Accede a tu cuenta para gestionar tu progreso, programas y acompañamiento personalizado.
+        </p>
+      </div>
+    </section>
+
+    <section class="auth-panel" aria-label="Formulario de acceso">
+      <div class="auth-card">
+        <div class="auth-tabs" role="tablist" aria-label="Opciones de sesión">
+          <button
+            type="button"
+            class="tab-button"
+            [class.is-active]="mode() === 'login'"
+            (click)="switchMode('login')"
+          >
+            Iniciar sesión
+          </button>
+          <button
+            type="button"
+            class="tab-button"
+            [class.is-active]="mode() === 'register'"
+            (click)="switchMode('register')"
+          >
+            Crear cuenta
+          </button>
+        </div>
+
+        <div class="message-area" *ngIf="formMessage() || successMessage()">
+          <p class="message error" *ngIf="formMessage()">{{ formMessage() }}</p>
+          <p class="message success" *ngIf="successMessage()">{{ successMessage() }}</p>
+        </div>
+
+        <form *ngIf="mode() === 'login'; else registerFormTemplate" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" novalidate>
+          <label class="field">
+            <span>Usuario</span>
+            <input type="text" formControlName="username" inputmode="numeric" autocomplete="username" placeholder="Número de CC" />
+            <small class="field-error" *ngIf="isInvalid('username', 'login')">
+              {{ getLoginUsernameError() }}
+            </small>
+          </label>
+
+          <label class="field">
+            <span>Contraseña</span>
+            <input type="password" formControlName="password" autocomplete="current-password" placeholder="Contraseña" />
+            <small class="field-error" *ngIf="isInvalid('password', 'login')">
+              {{ getLoginPasswordError() }}
+            </small>
+          </label>
+
+          <button type="submit" class="primary-button">Ingresar</button>
+        </form>
+
+        <ng-template #registerFormTemplate>
+          <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" novalidate>
+            <label class="field">
+              <span>Usuario</span>
+              <input type="text" formControlName="username" inputmode="numeric" autocomplete="username" placeholder="Número de CC" />
+              <small class="field-error" *ngIf="isInvalid('username', 'register')">
+                {{ getRegisterUsernameError() }}
+              </small>
+            </label>
+
+            <label class="field">
+              <span>Contraseña</span>
+              <input type="password" formControlName="password" autocomplete="new-password" placeholder="Contraseña alfanumérica" />
+              <small class="field-error" *ngIf="isInvalid('password', 'register')">
+                {{ getRegisterPasswordError() }}
+              </small>
+            </label>
+
+            <label class="field">
+              <span>Confirmar contraseña</span>
+              <input type="password" formControlName="confirmPassword" autocomplete="new-password" placeholder="Repite tu contraseña" />
+              <small class="field-error" *ngIf="isInvalid('confirmPassword', 'register') || registerForm.get('confirmPassword')?.errors?.['mismatch']">
+                {{ getConfirmPasswordError() }}
+              </small>
+            </label>
+
+            <button type="submit" class="primary-button">Crear usuario</button>
+          </form>
+        </ng-template>
+      </div>
+    </section>
+  </main>
+</div>
