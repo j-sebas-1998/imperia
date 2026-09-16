@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,4 +6,14 @@ import { Component } from '@angular/core';
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
-export class LandingPage {}
+export class LandingPage {
+  readonly isMenuOpen = signal(false);
+
+  toggleMenu(): void {
+    this.isMenuOpen.update((isOpen) => !isOpen);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
+  }
+}
